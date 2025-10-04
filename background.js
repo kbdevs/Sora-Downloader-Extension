@@ -1,5 +1,24 @@
-chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
+function isAllowedUrl(url) {
+  if (!url) {
+    return false;
+  }
+
+  try {
+    const parsed = new URL(url);
+    return parsed.hostname === 'sora.com' || parsed.hostname.endsWith('.sora.com');
+  } catch (_error) {
+    return false;
+  }
+}
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (!message || message.type !== "download-video") {
+    return;
+  }
+
+  const senderUrl = sender && sender.url;
+  if (!isAllowedUrl(senderUrl)) {
+    sendResponse({ ok: false, error: "unauthorized-host" });
     return;
   }
 

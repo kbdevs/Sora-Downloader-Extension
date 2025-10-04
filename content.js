@@ -1,5 +1,19 @@
 'use strict';
 
+function isAllowedHost(hostname) {
+  if (!hostname) {
+    return false;
+  }
+
+  if (hostname === 'sora.com') {
+    return true;
+  }
+
+  return hostname.endsWith('.sora.com');
+}
+
+const isSoraContext = isAllowedHost(window.location.hostname || '');
+
 const BUTTON_CLASS = 'sora-downloader__button';
 const WRAPPER_CLASS = 'sora-downloader__wrapper';
 const POSITION_FLAG = 'data-sora-downloader-positioned';
@@ -312,6 +326,10 @@ function handleMutations(mutations) {
 }
 
 function bootstrap() {
+  if (!isSoraContext) {
+    return;
+  }
+
   handleExistingVideos();
   ensureDownloadAllButton();
 
@@ -322,8 +340,12 @@ function bootstrap() {
   });
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', bootstrap, { once: true });
+if (isSoraContext) {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bootstrap, { once: true });
+  } else {
+    bootstrap();
+  }
 } else {
-  bootstrap();
+  console.info('SoraDownloader: skipping execution outside sora.com');
 }
