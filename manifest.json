@@ -7,7 +7,8 @@
     "downloads"
   ],
   "host_permissions": [
-    "<all_urls>"
+    "https://*.sora.com/*",
+    "https://sora.com/*"
   ],
   "background": {
     "service_worker": "background.js"
@@ -15,7 +16,8 @@
   "content_scripts": [
     {
       "matches": [
-        "<all_urls>"
+        "https://*.sora.com/*",
+        "https://sora.com/*"
       ],
       "js": [
         "content.js"
