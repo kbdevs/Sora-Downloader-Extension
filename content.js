@@ -1,15 +1,10 @@
 'use strict';
 
+
 function isAllowedHost(hostname) {
-  if (!hostname) {
-    return false;
-  }
-
-  if (hostname === 'sora.com') {
-    return true;
-  }
-
-  return hostname.endsWith('.sora.com');
+  if (!hostname) return false;
+  if (hostname === 'sora.chatgpt.com') return true;
+  return hostname.endsWith('.sora.chatgpt.com');
 }
 
 const isSoraContext = isAllowedHost(window.location.hostname || '');

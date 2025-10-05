@@ -7,8 +7,8 @@
     "downloads"
   ],
   "host_permissions": [
-    "https://*.sora.com/*",
-    "https://sora.com/*"
+    "https://*.sora.chatgpt.com/*",
+    "https://sora.chatgpt.com/*"
   ],
   "background": {
     "service_worker": "background.js"
@@ -16,8 +16,8 @@
   "content_scripts": [
     {
       "matches": [
-        "https://*.sora.com/*",
-        "https://sora.com/*"
+        "https://*.sora.chatgpt.com/*",
+        "https://sora.chatgpt.com/*"
       ],
       "js": [
         "content.js"

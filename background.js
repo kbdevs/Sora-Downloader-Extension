@@ -1,11 +1,9 @@
 function isAllowedUrl(url) {
-  if (!url) {
-    return false;
-  }
-
+  if (!url) return false;
   try {
     const parsed = new URL(url);
-    return parsed.hostname === 'sora.com' || parsed.hostname.endsWith('.sora.com');
+    if (parsed.hostname === 'sora.chatgpt.com') return true;
+    return parsed.hostname.endsWith('.sora.chatgpt.com');
   } catch (_error) {
     return false;
   }
